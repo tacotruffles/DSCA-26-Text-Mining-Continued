@@ -1,0 +1,23 @@
+---
+title: "In Class"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library('tidyverse')
+library('tidytext')
+```
+
+
+I want to compare usage of certain words in Fox News vs MSNBC tweets. How can we go about that using what we learned in the previous class?
+```{r}
+raw_dat = read_csv('tweet_data.csv') 
+
+dat = raw_dat %>% 
+  filter(screen_name %in% c('MSNBC', 'FoxNews')) %>%
+  select(screen_name, full_text)
+
+head(dat)
+```
+

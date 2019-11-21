@@ -21,6 +21,39 @@ dat = raw_dat %>%
 head(dat)
 ```
 
+# Chapter 1:
+```{r}
+# Clean out http links and tokenize tweets
+tweet_words <- dat %>%
+  mutate(full_text = gsub("\\s?(f|ht)(tp)(s?)(://)([^\\.]*)[\\.|/](\\S*)", "", full_text)) %>%
+  unnest_tokens(word, full_text)  
+```
+
+```{r}
+data("stop_words")
+
+tweet_words_clean <- tweet_words %>%
+  group_by(screen_name) %>%
+  anti_join(stop_words)
+```
+
+```{r}
+#See which words are most used
+tweet_words_clean %>%
+  count(word, sort = TRUE) %>%
+  top_n(10) %>%
+  ggplot(aes(fct_reorder(word,n), n)) +
+  geom_col(aes(fill = screen_name)) + 
+  coord_flip() + 
+  facet_wrap(~screen_name, scales='free')
+```
+
+```{r}
+
+```
+
+
+# Chapter 3:
 ```{r}
 # Unnest words into tokens and count them => n
 tweet_words <- dat %>%

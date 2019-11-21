@@ -61,7 +61,7 @@ tweet_words <- tweet_words %>%
   arrange(desc(tf_idf) )
 ```
 
-```{r}
+```{r, message=FALSE}
 # Now lets plot based on word ranking
 tweet_words %>%
   arrange(desc(tf_idf)) %>%
